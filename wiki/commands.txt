@@ -1,0 +1,8 @@
+docker images
+docker image rm image_id
+docker rm container_id
+
+//SOLO CUANDO TENGAMOS QUE CONSTRUIR
+//NUESTRA IMAGEN my-prometheus
+cd my-prometheus
+docker build -t my-prometheus .
