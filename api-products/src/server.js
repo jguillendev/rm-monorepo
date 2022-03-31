@@ -1,49 +1,82 @@
 
 'use strict';
 
-const express = require('express')
+//OBTIENES DEPENDENCIAS NECESARIAS PARA EJECUTAR TODO LO QUE HACE ESTE ARCHIVO
+const express = require('express');
 const client = require('prom-client');
 
+//CREAS UNA APP DE EXPRESS
 const app = express();
-const port = 5000;
+
+// DEFINES UN PUERTO
+const port = process.env.PORT || 5000;
+
+//ARREGLO DE DATOS (FAKE-DUMMY)
 const products = [{
     id:'54f6d4s65',
     name: 'fideos',
     price: 99.90
 }];
 
-//const defaultLabels = { serviceName: 'api-v1' };
-//client.register.setDefaultLabels(defaultLabels);
+//  ### METRICAS DE PROMETHEUS ###
+
+//CREA UN NUEVO REGISTRY 
 const registry = new client.Registry();
 
+//CREA UNA METRICA DE TIPO COUNTER
 const counter = new client.Counter({
   name: 'aggregated_products',
   help: 'The total de productos agregados',
   labelNames: ['product_add']
 });
+
+//CREA OTRA METICA DE TIPO COUNTER
 const apiCallsCounter = new client.Counter({
     name: 'api_calls',
     help: 'Total de peticiones a la api'
 });
 
+//REGISTRA METRICA EN EL REGISTRY
 registry.registerMetric(apiCallsCounter); 
-registry.registerMetric(counter); 
+
+//REGISTRA METRICA EN EL REGISTRY
+registry.registerMetric(counter);
+
+//ESTABLECE DEFAULT LABELS
 registry.setDefaultLabels({
     app: 'api-products'
 });
+
+//DEFINIR QUE REGISTRY VA A RECOLECTAR LAS METRICAS
 client.collectDefaultMetrics({
     register: registry
 });
 
+//  ###  PETICIONES DISPONIBLES DE LA API ###
+
+//ESTO ES UNA PETICION HTTP GET EN EL ROOT
 app.get('/', function (req, res) {
     apiCallsCounter.inc();
     res.send('Tooly Fans Products API');
 })
 
+//ESTO ES UNA PETICION HTTP GET
 app.get('/list', function (req, res) {
-    res.status(200).send(products);
+
+    //HACIENDO ALGO DENTRO DE ESTA PETICION
+    const result = {
+        pagination: {
+            currentPage:0,
+            pageSize:20,
+            nextPage:2,
+        },
+        items: products,
+        count: products.length,
+    }
+    res.status(200).send(result);
 })
 
+//ESTO ES UNA PETICION HTTP POST
 app.post('/add', function (req, res) {
 
     const productAdd = req.body;
