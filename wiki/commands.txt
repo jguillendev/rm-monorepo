@@ -6,3 +6,18 @@ docker rm container_id
 //NUESTRA IMAGEN my-prometheus
 cd my-prometheus
 docker build -t my-prometheus .
+
+cd api-products
+docker build -t api-products .
+
+
+[RUN DOCKER COMPOSE]
+//ir al directorio raiz del proyecto donde esta el archivo docker-compose.yaml
+docker compose up
+
+//los proyectos ahora estan corriendo en
+CONTAINER    HOST DE DESARROLLO      USAR DIRECCION IPv4
+api-products http://localhost:83     http://192.168.0.3:83
+prometheus   http://localhost:9091   http://192.168.0.3:9091
+grafana      http://localhost:3000   http://192.168.0.3:3000
+
