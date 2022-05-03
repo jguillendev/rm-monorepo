@@ -6,6 +6,8 @@ https://github.com/settings/tokens
 
 GitHub Data Source
 https://grafana.com/grafana/plugins/grafana-github-datasource/
+git: https://github.com/grafana/github-datasource
+
 
 
 
