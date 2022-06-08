@@ -1,0 +1,8 @@
+{
+  "name": "front-react",
+  "version": "1.0.0",
+  "description": "my demo project",
+  "main": "index.js",
+  "author": "jguillendev",
+  "license": "MIT"
+}

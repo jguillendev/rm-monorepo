@@ -12,6 +12,18 @@ services:
       DB_USERS_IP: 1.0.0.0
       DB_USERS_USER: admin
       DB_USER_PASS: admin
+  api-answers:
+    build:
+      context: ./api-answers
+    container_name: c-api-answers
+    image: api-answers
+    ports:
+      - "84:4000"
+    environment:
+      FLASK_ENV: development
+      DB_USERS_IP: 1.0.0.0
+      DB_USERS_USER: admin
+      DB_USER_PASS: admin
   prometheus:
     build:
       context: ./my-prometheus
