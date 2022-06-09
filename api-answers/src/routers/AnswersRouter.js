@@ -13,6 +13,15 @@ router.use(function (req, res, next) {
     next();
 })
 
+//end request middleware
+router.use(( err, req, res, next ) => {
+    res.on('finish', function() {
+        console.log("RESPONSE: ", res);
+        trace("RESPONSE");
+        trace(res);
+    });
+})
+
 
 router.get('/', (req, res) => {
     res.status(200).json({msg:"welcome to answers api"});

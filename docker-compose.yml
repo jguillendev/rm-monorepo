@@ -24,6 +24,13 @@ services:
       DB_USERS_IP: 1.0.0.0
       DB_USERS_USER: admin
       DB_USER_PASS: admin
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    command: --serviceExecutor adaptive
+    ports:
+      - "3500:3500"
   prometheus:
     build:
       context: ./my-prometheus
