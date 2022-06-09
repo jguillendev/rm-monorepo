@@ -2,20 +2,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const flightSchema = new Schema({
-    _id: Schema.Types.ObjectId,
-    airline:{
-        type: Types.ObjectId,
-        ref: 'airline',
+    _id: false,
+    id_airline:{
+        type: Number,
         required: true
     },
-    airport:{
-        type: Schema.Types.ObjectId,
-        ref: 'airport',
+    id_airport:{
+        type: Number,
         required: true
     },
-    landing:{
-        type: Schema.Types.ObjectId,
-        ref: 'landing',
+    id_landing:{
+        type: Number,
         required: true
     },
     day: {
@@ -25,4 +22,4 @@ const flightSchema = new Schema({
 });
 
 const flight = mongoose.model('flight', flightSchema, 'flights');
-module.exports.flight = flight;
+module.exports.Flight = flight;

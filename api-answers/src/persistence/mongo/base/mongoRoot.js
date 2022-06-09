@@ -8,22 +8,28 @@ const connectionStrings = {
     }
 }
 
-const InitMongoDb = function(connectionString, options, callback){
+const InitMongoDb = function(connectionString){
 
-    // mongoose.connection.on('open', e => {
-    //     console.log("mongoose:open:error:",e);
-    // });
-    // mongoose.connection.on('connecting', e => {
-    //     console.log("mongoose:connecting:error:",e);
-    // });
-    // mongoose.connection.on('connected', e => {
-    //     console.log("mongoose:connected:error:",e);
-    // });
-    // mongoose.connection.on('error', err => {
-    //     console.log("mongoose:connection:error:",err);
-    // });
+    mongoose.connection.on('open', e => {
+        console.log("mongoose:open:error:",e);
+    });
+    mongoose.connection.on('connecting', e => {
+        console.log("mongoose:connecting:error:",e);
+    });
+    mongoose.connection.on('connected', e => {
+        console.log("mongoose:connected:error:",e);
+    });
+    mongoose.connection.on('error', err => {
+        console.log("mongoose:connection:error:",err);
+    });
 
-    return mongoose.connect(connectionString, options, callback);
+    const options = { 
+        useNewUrlParser: true,
+        useUnifiedTopology:true 
+    }
+    mongoose.connect(connectionString, options, function(err){
+        console.log("mongoose.connect.err: ", err);
+    }) 
 
 }
 

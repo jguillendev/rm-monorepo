@@ -1,13 +1,11 @@
-//const { InitMongoDb, InitMongoDbAsync } = require('../src/persistence/mongo/base/mongoRoot');
-//import { Schema, model, connect } from 'mongoose';
-//const mongoose = require('mongoose');
+require('dotenv').config();
 const {MongoClient} = require('mongodb');
 
 jest.setTimeout(8000)
 
 describe('insert', () => {
     
-    const connString = "mongodb+srv://user_dev:s4YDLwExGsQmibMK@freecluster.9td3h.mongodb.net/xaldigital?retryWrites=true&w=majority";
+    const connString = process.env.DB_CONN_STRING;
     let connection;
     let db;
   
@@ -17,6 +15,7 @@ describe('insert', () => {
           useUnifiedTopology: true,
         });
         db = await connection.db();
+        db.collection('airlines').deleteMany({});
     });
 
     afterAll(async () => {
@@ -31,8 +30,8 @@ describe('insert', () => {
           id:2,
           name:'interject'
       });
+
       const insertedAirline = await airlines.findOne({id:2});
-      console.log("insertedAirline: ", insertedAirline);
       expect(insertedAirline.name).toEqual('interject');
     });
   });

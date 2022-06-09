@@ -14,5 +14,5 @@ const airlineSchema = new Schema({
     }
 });
 
-const Airline = mongoose.model('airline', airlineSchema, 'airlines');
-module.exports.Airline = Airline;
+const airline = mongoose.model('airline', airlineSchema, 'airlines');
+module.exports.Airline = airline;
