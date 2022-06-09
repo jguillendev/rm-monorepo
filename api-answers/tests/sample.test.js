@@ -1,23 +1,38 @@
+//const { InitMongoDb, InitMongoDbAsync } = require('../src/persistence/mongo/base/mongoRoot');
+//import { Schema, model, connect } from 'mongoose';
+//const mongoose = require('mongoose');
+const {MongoClient} = require('mongodb');
 
-const sum = (a, b) => a+b;
+jest.setTimeout(8000)
 
-// beforeAll(() => {
-//     const {InitMongoDbAsync} = require('../src/persistence/mongo/base/mongoRoot');
-//     const connString = "mongodb+srv://user_dev:PodcbMnYxaBj4aC7@freecluster.9td3h.mongodb.net/xaldigital?retryWrites=true&w=majority";
-//     return InitMongoDbAsync(connString).then((success)=>{
-//         expect(success).toEqual(true);
-//     });
-// });
+describe('insert', () => {
+    
+    const connString = "mongodb+srv://user_dev:s4YDLwExGsQmibMK@freecluster.9td3h.mongodb.net/xaldigital?retryWrites=true&w=majority";
+    let connection;
+    let db;
   
-// afterAll(() => {
-//     return clearCityDatabase();
-// });
+    beforeAll(async () => {
+        connection = await MongoClient.connect(connString, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        });
+        db = await connection.db();
+    });
 
-test('adds 1 + 2 to equal 3', async () => {
-    const {InitMongoDbAsync} = require('../src/persistence/mongo/base/mongoRoot');
-    const connString = "mongodb+srv://user_dev:PodcbMnYxaBj4aC7@freecluster.9td3h.mongodb.net/xaldigital?retryWrites=true&w=majority";
-    const connected = await InitMongoDbAsync(connString);
-    expect.assertions(2);
-    expect(sum(1, 2)).toBe(3);
-    expect(connected).toEqual(true);
-});
+    afterAll(async () => {
+      await connection.close();
+    });
+  
+    it('should insert a doc into collection', async () => {
+      const airlines = db.collection('airlines');
+  
+      await airlines.insertOne({
+          _id: false,
+          id:2,
+          name:'interject'
+      });
+      const insertedAirline = await airlines.findOne({id:2});
+      console.log("insertedAirline: ", insertedAirline);
+      expect(insertedAirline.name).toEqual('interject');
+    });
+  });

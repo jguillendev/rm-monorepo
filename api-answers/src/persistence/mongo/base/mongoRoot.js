@@ -8,8 +8,26 @@ const connectionStrings = {
     }
 }
 
-const InitMongoDb = function(connectionString){
+const InitMongoDb = function(connectionString, options, callback){
 
+    // mongoose.connection.on('open', e => {
+    //     console.log("mongoose:open:error:",e);
+    // });
+    // mongoose.connection.on('connecting', e => {
+    //     console.log("mongoose:connecting:error:",e);
+    // });
+    // mongoose.connection.on('connected', e => {
+    //     console.log("mongoose:connected:error:",e);
+    // });
+    // mongoose.connection.on('error', err => {
+    //     console.log("mongoose:connection:error:",err);
+    // });
+
+    return mongoose.connect(connectionString, options, callback);
+
+}
+
+const InitMongoDbAsync = async (connectionString, ca) =>{
     mongoose.connection.on('open', e => {
         console.log("mongoose:open:error:",e);
     });
@@ -27,22 +45,7 @@ const InitMongoDb = function(connectionString){
         useNewUrlParser: true,
         useUnifiedTopology:true 
     }
-    mongoose.connect(connectionString, options, function(err){
-        console.log("mongoose.connect.err: ", err);
-    }) 
-
-}
-
-const InitMongoDbAsync = (connectionString) =>{
-    return new Promise((resolve, reject)=>{
-        try {
-            InitMongoDb(connectionString);
-            resolve(true);
-        }
-        catch(ex){
-            reject(false);
-        }
-    });
+    return await mongoose.connect(connectionString, options);
 }
 
 module.exports.InitMongoDb = InitMongoDb;
