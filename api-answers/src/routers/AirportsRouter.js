@@ -1,7 +1,7 @@
 var express = require('express');
 const bodyParser = require('body-parser');
 var router = express.Router();
-const {initialize} = require('../applicationLayer/airportActions');
+const {initialize, actionOne} = require('../applicationLayer/airportActions');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -30,6 +30,21 @@ router.get('/', (req, res) => {
 router.get('/initialize', async (req, res) => {
     try {
         const {error, message, data} = await initialize();
+        res.status(200).json(data);
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({
+            error:err,
+            type:"Exception",
+            message:"Exception in server"
+        })
+    }
+});
+
+router.get('/one', async (req, res) => {
+    try {
+        const {error, message, data} = await actionOne();
         res.status(200).json(data);
     }
     catch(err){
