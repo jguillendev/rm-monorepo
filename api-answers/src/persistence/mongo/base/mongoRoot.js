@@ -8,10 +8,6 @@ const connectionStrings = {
     }
 }
 
-const connectionStringBuild = function(database){
-    return `mongodb+srv://dev_user:4R4qYC0ISSgzUe2R@cluster0.za99y.mongodb.net/${database}?retryWrites=true&w=majority`
-}
-
 const InitMongoDb = function(connectionString){
 
     mongoose.connection.on('open', e => {
@@ -37,6 +33,17 @@ const InitMongoDb = function(connectionString){
 
 }
 
+const InitMongoDbAsync = (connectionString) =>{
+    return new Promise((resolve, reject)=>{
+        try {
+            InitMongoDb(connectionString);
+            resolve(true);
+        }
+        catch(ex){
+            reject(false);
+        }
+    });
+}
+
 module.exports.InitMongoDb = InitMongoDb;
-module.exports.connectionStrings = connectionStrings;
-module.exports.connectionStringBuild = connectionStringBuild;
+module.exports.InitMongoDbAsync = InitMongoDbAsync;
