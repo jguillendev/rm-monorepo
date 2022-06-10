@@ -31,7 +31,7 @@ const AppStarting:FC = ({ children }) => {
             setStartingData({
                 ready:true
             });
-        },1000)
+        },500);
     });
     
     return <React.Fragment>

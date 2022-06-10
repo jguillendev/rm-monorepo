@@ -1,5 +1,8 @@
 import React, { Suspense, useLayoutEffect } from 'react';
 import { Route, Routes, useLocation } from "react-router-dom";
+import { AdminHomePage } from './AdminHomePage';
+import { AnswersPage } from './answers/AnswersPage';
+import { FlightsPage } from './FlightsPage';
 
 
 const AdminRoutes = () => {
@@ -12,16 +15,14 @@ const AdminRoutes = () => {
     return (
         <Routes  location={state?.backgroundLocation || location}>
             <Route path="/" element={<AdminHomePage/>} />
+            <Route path="/answers" element={<AnswersPage/>} />
+            <Route path="/flights" element={<FlightsPage/>} />
             <Route path="*" element={<NotFoundPage />}/>
         </Routes>
     );
 }
 
-export const AdminHomePage = () =>{
-    return <div>
-        <h1>Admin Home Page</h1>
-    </div>
-}
+
 export const NotFoundPage = () =>{
     return <div>
         <h1>Admin page not found</h1>
