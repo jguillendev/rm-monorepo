@@ -1,7 +1,7 @@
 var express = require('express');
 const bodyParser = require('body-parser');
 var router = express.Router();
-const {initialize, actionOne} = require('../applicationLayer/airportActions');
+const {initialize, actionOne, actionTwo, actionThree, actionFour } = require('../applicationLayer/airportActions');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -55,7 +55,51 @@ router.get('/one', async (req, res) => {
             message:"Exception in server"
         })
     }
-})
+});
 
+router.get('/two', async (req, res) => {
+    try {
+        const {error, message, data} = await actionTwo();
+        res.status(200).json(data);
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({
+            error:err,
+            type:"Exception",
+            message:"Exception in server"
+        })
+    }
+});
+
+router.get('/three', async (req, res) => {
+    try {
+        const {error, message, data} = await actionThree();
+        res.status(200).json(data);
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({
+            error:err,
+            type:"Exception",
+            message:"Exception in server"
+        })
+    }
+});
+
+router.get('/four', async (req, res) => {
+    try {
+        const {error, message, data} = await actionFour();
+        res.status(200).json(data);
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({
+            error:err,
+            type:"Exception",
+            message:"Exception in server"
+        })
+    }
+});
 
 module.exports.AirportsRouter = router;
