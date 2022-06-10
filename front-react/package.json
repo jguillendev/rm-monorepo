@@ -1,8 +1,50 @@
 {
-  "name": "front-react",
-  "version": "1.0.0",
-  "description": "my demo project",
-  "main": "index.js",
-  "author": "jguillendev",
-  "license": "MIT"
+    "name": "front-react",
+    "version": "1.0.0",
+    "description": "xaldigital demo project",
+    "author": "jguillendev",
+    "license": "MIT",
+    "scripts": {
+        "clean": "rimraf ./dist",
+        "tw:build": "npx tailwindcss -i ./input.css -o ./src/public/output.css",
+        "tw:build:w": "npx tailwindcss -i ./input.css -o ./src/public/output.css --watch",
+        "build:report": "parcel build src/index.html --reporter @parcel/reporter-bundle-analyzer",
+        "build:reporter:2": "parcel build src/index.html --reporter @parcel/reporter-bundle-buddy",
+        "prebuild": "run-s clean && node imageBuild.mjs",
+        "build": "parcel build src/index.html --log-level --no-source-maps verbose",
+        "cp-files": "node copy-files.js",
+        "postbuild": "npm run cp-files && node postBuild.js && workbox generateSW",
+        "start:dev": "parcel serve src/index.html --port 1234 --open",
+        "start:dev:w": "parcel watch src/index.html --hmr-port 1235"
+    },
+    "browserslist": [
+        "last 1 Chrome version",
+        "last 3 and_chr versions",
+        "last 3 chrome versions",
+        "last 3 opera versions",
+        "last 3 ios_saf versions",
+        "last 3 safari versions"
+    ],
+    "dependencies": {
+        "framer-motion": "^4.1.17",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-lazyload": "^3.2.0",
+        "react-router-dom": "^6.3.0",
+        "react-toastify": "^8.2.0",
+        "recoil": "^0.7.3"
+    },
+    "devDependencies": {
+        "@parcel/reporter-bundle-analyzer": "^2.3.2",
+        "@parcel/reporter-bundle-buddy": "^2.3.2",
+        "@types/react": "^18.0.12",
+        "parcel-bundler": "^1.12.5",
+        "tailwindcss": "^3.1.2",
+        "typescript": "^4.3.5",
+        "workbox-cli": "^6.5.1",
+        "rimraf": "^3.0.2",
+        "npm-run-all": "^4.1.5",
+        "imagemin": "^8.0.1",
+        "imagemin-webp": "^7.0.0"
+    }
 }
