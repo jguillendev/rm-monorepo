@@ -19,7 +19,6 @@ const options = {
     ],
 }
 const openapiSpecification = swaggerJsdoc(options);
-console.log("swaggerSpec: ", openapiSpecification);
 
 router.use("/swagger", swaggerUI.serve);
 router.get("/swagger", swaggerUI.setup(openapiSpecification));

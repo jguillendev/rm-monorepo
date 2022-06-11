@@ -1,10 +1,30 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
+import { config } from "./configuration/config";
+import { useHttpRequest } from "./hooks/useHttpRequest";
+import { IRequest } from "./interfaces/interfaces";
 
 interface IHeaderBar {
     viewName:string;
 }
+interface IApiAvailable {
+    message:string;
+    available:boolean;
+}
+
+export const useAnswerApiAvailable = (param: IRequest) => useHttpRequest<any,IApiAvailable>(param);
+export const useAirportApiAvailable = (param: IRequest) => useHttpRequest<any,IApiAvailable>(param);
+
 export const HeaderBar = ({viewName}:IHeaderBar) =>{
+
+    const answerApi = useAnswerApiAvailable({
+        // @ts-ignore
+        url: config.apis.answers.url
+    });
+    const airportApi = useAnswerApiAvailable({
+        // @ts-ignore
+        url: config.apis.airports.url
+    });
 
     return <head className="flex flex-col md:flex-row bg-slate-800 shadow-md sticky">
         <div className="flex space-x-2 py-4 px-4">
@@ -21,14 +41,19 @@ export const HeaderBar = ({viewName}:IHeaderBar) =>{
                     className={ viewName =="home" ? " text-yellow-500" : "text-gray-200" }
                 ><li className="hover:text-yellow-500 cursor-pointer">Home</li>
                 </NavLink>
-                <NavLink to="/answers" replace
-                    className={ viewName == "answers" ? " text-yellow-500" : "text-gray-200" }
-                ><li className="hover:text-yellow-500 cursor-pointer">Asnwers</li>
-                </NavLink>
-                <NavLink to="/flights" replace
-                    className={ viewName == "flights" ? " text-yellow-500" : "text-gray-200" }
-                ><li className="hover:text-yellow-500 cursor-pointer">Flights</li>
-                </NavLink>
+                { airportApi.isLoading && <li className="hover:text-yellow-500 cursor-pointer">loading menus</li>}
+                {
+                    answerApi.data && answerApi.data.available && <NavLink to="/answers" replace
+                        className={ viewName == "answers" ? " text-yellow-500" : "text-gray-200" }
+                    ><li className="hover:text-yellow-500 cursor-pointer">Asnwers</li>
+                    </NavLink>
+                }
+                {
+                    airportApi.data && airportApi.data.available && <NavLink to="/flights" replace
+                        className={ viewName == "flights" ? " text-yellow-500" : "text-gray-200" }
+                    ><li className="hover:text-yellow-500 cursor-pointer">Flights</li>
+                    </NavLink>
+                }
             </ul>
         </div>
     </head>

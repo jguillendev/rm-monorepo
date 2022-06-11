@@ -32,7 +32,9 @@ router.use(( err, req, res, next ) => {
 *          description: Success
 */
 router.get('/', (req, res) => {
-    res.status(200).json({msg:"welcome to airports api"});
+    res.status(200).json({
+        available:true,
+        msg:"welcome to airports api"});
 })
 
 router.get('/initialize', async (req, res) => {
