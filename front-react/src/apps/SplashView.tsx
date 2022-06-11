@@ -25,7 +25,7 @@ const SplashView = (props:ISplashView) => {
         </div>
         <div className="flex flex-col pb-14">
             <h1 className="text-4xl md:text-6xl font-bold text-yellow-500">Cargando...</h1>
-            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-200">
+            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-500 dark:text-gray-200">
             por favor espere
             </h3>
         </div>

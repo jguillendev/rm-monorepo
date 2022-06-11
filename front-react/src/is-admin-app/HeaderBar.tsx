@@ -10,8 +10,8 @@ export const HeaderBar = ({viewName}:IHeaderBar) =>{
         <div className="flex space-x-2 py-4 px-4">
             <img className="h-14 w-14 rounded-full border-green-400 border-4  object-cover" src="https://i.pinimg.com/originals/e9/e0/75/e9e075386271a5449e62e885cd8fa226.jpg" />
             <div className="flex flex-col justify-center">
-                <p className="font-bold leading-none text-xl">J Alberto Guillén</p>
-                <p className="font-light leading-tight text-lg">Dev Senior</p>
+                <p className="font-bold leading-none text-xl text-gray-400">J Alberto Guillén</p>
+                <p className="font-light leading-tight text-lg text-gray-300">Dev Senior</p>
             </div>
         </div>
         <div className="flex-1"></div>

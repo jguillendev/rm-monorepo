@@ -35,7 +35,7 @@ router.get('/one', async (req, res) => {
     catch(ex){
         console.error(ex);
         res.status(500).json({
-            error:err,
+            error: ex,
             type:"Exception",
             message:"Exception in server"
         })
@@ -50,7 +50,7 @@ router.get('/two', async (req, res) => {
     catch(ex){
         console.error(ex);
         res.status(500).json({
-            error:err,
+            error:ex,
             type:"Exception",
             message:"Exception in server"
         })
@@ -65,7 +65,7 @@ router.get('/three', async (req, res) => {
     catch(ex){
         console.error(ex);
         res.status(500).json({
-            error:err,
+            error:ex,
             type:"Exception",
             message:"Exception in server"
         })
@@ -78,9 +78,11 @@ router.get('/four', async (req, res) => {
         res.status(200).json(data);
     }
     catch(ex){
-        console.error(ex);
+        console.error("four:ex: ", ex);
+        console.error("four:ex:data: ", ex.data);
+        
         res.status(500).json({
-            error:err,
+            error:ex,
             type:"Exception",
             message:"Exception in server"
         })
