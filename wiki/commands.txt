@@ -10,6 +10,12 @@ docker build -t my-prometheus .
 cd api-products
 docker build -t api-products .
 
+cd api-answers
+docker build -t api-answers .
+
+cd front-react
+docker build -t front-react .
+
 
 [RUN DOCKER COMPOSE]
 //ir al directorio raiz del proyecto donde esta el archivo docker-compose.yaml
@@ -17,7 +23,9 @@ docker compose up
 
 //los proyectos ahora estan corriendo en
 CONTAINER    HOST DE DESARROLLO      USAR DIRECCION IPv4
+front-react  http://localhost:1234   http://192.168.0.3:1234
 api-products http://localhost:83     http://192.168.0.3:83
+api-answers  http://localhost:84     http://192.168.0.3:83
 prometheus   http://localhost:9091   http://192.168.0.3:9091
 grafana      http://localhost:3000   http://192.168.0.3:3000
 

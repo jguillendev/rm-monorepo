@@ -4,13 +4,14 @@
     "description": "xaldigital demo project",
     "author": "jguillendev",
     "license": "MIT",
+    "type": "module",
     "scripts": {
         "clean": "rimraf ./dist",
         "tw:build": "npx tailwindcss -i ./input.css -o ./src/public/output.css",
         "tw:build:w": "npx tailwindcss -i ./input.css -o ./src/public/output.css --watch",
         "build:report": "parcel build src/index.html --reporter @parcel/reporter-bundle-analyzer",
         "build:reporter:2": "parcel build src/index.html --reporter @parcel/reporter-bundle-buddy",
-        "prebuild": "run-s clean && node imageBuild.mjs",
+        "prebuild": "npm run clean && node imageBuild.mjs",
         "build": "parcel build src/index.html --log-level --no-source-maps verbose",
         "cp-files": "node copy-files.js",
         "postbuild": "npm run cp-files && node postBuild.js && workbox generateSW",
@@ -45,7 +46,6 @@
         "rimraf": "^3.0.2",
         "npm-run-all": "^4.1.5",
         "imagemin": "^8.0.1",
-        "imagemin-webp": "^7.0.0",
-        "dotenv": "^16.0.1"
+        "imagemin-webp": "^7.0.0"
     }
 }

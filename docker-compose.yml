@@ -1,5 +1,19 @@
 version: "3"
 services:
+  front-react:
+    build:
+      context: ./front-react
+    container_name: c-front-react
+    image: front-react
+    stdin_open: true
+    ports: 
+      - 80:1234
+    networks:
+      - xal-digital
+    environment:
+      - REACT_APP_VERSION=1.0.0-compose
+      - REACT_APP_API_ANSWERS=http://localhost:5000/api/answers
+      - REACT_APP_API_AIRPORTS=http://localhost:5000/api/airports
   api-products:
     build:
       context: ./api-products
@@ -7,6 +21,8 @@ services:
     image: api-products
     ports:
       - "83:5000"
+    networks:
+      - xal-digital
     environment:
       FLASK_ENV: development
       DB_USERS_IP: 1.0.0.0
@@ -19,6 +35,8 @@ services:
     image: api-answers
     ports:
       - "84:4000"
+    networks:
+      - xal-digital
     environment:
       FLASK_ENV: development
       DB_USERS_IP: 1.0.0.0
@@ -29,8 +47,16 @@ services:
   mongo:
     image: mongo
     command: --serviceExecutor adaptive
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
     ports:
       - "3500:3500"
+    networks:
+      - xal-digital
+    volumes:
+      - mongo-data:/data/db 
   prometheus:
     build:
       context: ./my-prometheus
@@ -38,6 +64,8 @@ services:
     image: my-prometheus
     ports: 
       - "9091:9090"
+    networks:
+      - xal-digital
   grafana:
     image: grafana/grafana
     ports:
@@ -46,3 +74,11 @@ services:
       - GF_AUTH_BASIC_ENABLED=false
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    networks:
+      - xal-digital
+networks:
+  xal-digital:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
