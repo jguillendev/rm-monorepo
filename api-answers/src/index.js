@@ -10,7 +10,6 @@ const {registryMetrics} = require('./server-metrics');
 
 //CREAS UNA APP DE EXPRESS
 const app = express();
-
 // DEFINES UN PUERTO
 const port = process.env.PORT || 5000;
 
@@ -19,6 +18,7 @@ InitMongoDb(process.env.DB_CONN_STRING);
 // ## USANDO NUESTRO SERVER DE EXPRESS
 //Usando Express
 const { ExpressApp } = require('./servers/express/server');
+
 ExpressApp.use(express.static(path.join(__dirname, 'public')));
 ExpressApp.get('/', (req, res) => {
   res.sendFile(path.join(__dirname+'/public/index.html'));
@@ -31,13 +31,14 @@ ExpressApp.get('/metrics', async (req, res) => {
   res.end(metrics);
 })
 
+const { SwaggerRouter } = require('./routers/SwaggerRouter');
 //Extendiendo el backend
 //Aqui el backquend o las funcionalidades se extienden agregando los routers
-
-
 const { AnswersRouter } = require('./routers/AnswersRouter');
 const { AirportsRouter } = require('./routers/AirportsRouter');
 
+//agregando Swagger api routes
+ExpressApp.use('/api/docs', SwaggerRouter);
 //agregando Answers api routes
 ExpressApp.use('/api/answers', AnswersRouter);
 //agregando Airports api routes

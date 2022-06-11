@@ -22,7 +22,15 @@ router.use(( err, req, res, next ) => {
     });
 })
 
-
+/** 
+ * @openapi
+ * /api/answers:
+ *   get:
+*      description: response if answers api is available
+*      responses:
+*        200:
+*          description: Success
+*/
 router.get('/', (req, res) => {
     res.status(200).json({msg:"welcome to answers api"});
 })
