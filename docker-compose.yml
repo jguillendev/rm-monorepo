@@ -1,15 +1,17 @@
 version: "3"
 services:
-  front-react:
+  xdigital-app:
     build:
-      context: ./front-react
-    container_name: c-front-react
-    image: front-react
+      context: ./xdigital-app
+    container_name: c-xdigital-app
+    image: xdigital-app
     stdin_open: true
     ports: 
-      - 80:1234
+      - 82:3000
     networks:
       - xal-digital
+    volumes:
+      - ".:/usr/src/app"
     environment:
       - REACT_APP_VERSION=1.0.0-compose
       - REACT_APP_API_ANSWERS=http://localhost:5000/api/answers
@@ -33,8 +35,10 @@ services:
       context: ./api-answers
     container_name: c-api-answers
     image: api-answers
+    env_file:
+      - ./api-answers/.env
     ports:
-      - "84:4000"
+      - "84:5000"
     networks:
       - xal-digital
     environment:

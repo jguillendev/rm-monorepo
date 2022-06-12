@@ -16,16 +16,25 @@ docker build -t api-answers .
 cd front-react
 docker build -t front-react .
 
+cd xdigital-app
+docker build -t xdigital-app .
+
+[RUN DOCKER IMAGE]
+docker run -dp 5001:3000 xdigital-app
+//aparece algo asi 0.0.0.0:5001->3000/tcp
+//ya podemos abrir el localhost:5001
+
 
 [RUN DOCKER COMPOSE]
 //ir al directorio raiz del proyecto donde esta el archivo docker-compose.yaml
 docker compose up
 
 //los proyectos ahora estan corriendo en
-CONTAINER    HOST DE DESARROLLO      USAR DIRECCION IPv4
-front-react  http://localhost:1234   http://192.168.0.3:1234
-api-products http://localhost:83     http://192.168.0.3:83
-api-answers  http://localhost:84     http://192.168.0.3:83
-prometheus   http://localhost:9091   http://192.168.0.3:9091
-grafana      http://localhost:3000   http://192.168.0.3:3000
+CONTAINER    HOST DE DESARROLLO      USAR DIRECCION IPv4 : Adaptador de Ethernet Ethernet
+xdigital-app  http://localhost:1234  http://192.168.0.2:82
+api-products http://localhost:83     http://192.168.0.2:4000
+api-answers  http://localhost:84     http://192.168.0.2:84
+mongo        http://localhost:3500   http://192.168.0.2:3500
+prometheus   http://localhost:9091   http://192.168.0.2:9091
+grafana      http://localhost:3000   http://192.168.0.2:3000
 

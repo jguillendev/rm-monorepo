@@ -4,7 +4,6 @@
     "description": "xaldigital demo project",
     "author": "jguillendev",
     "license": "MIT",
-    "type": "module",
     "scripts": {
         "clean": "rimraf ./dist",
         "tw:build": "npx tailwindcss -i ./input.css -o ./src/public/output.css",

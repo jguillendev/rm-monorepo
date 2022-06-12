@@ -2,11 +2,11 @@
     "name": "api-products",
     "version": "1.0.0",
     "description": "the tooly-fans users api",
-    "main": "server.js",
+    "main": "src/server.js",
     "author": "jguillendev@gmail.com",
     "license": "MIT",
     "scripts": {
-      "start": "node server.js"
+      "start": "node src/server.js"
     },
     "dependencies": {
       "express": "^4.17.3",
