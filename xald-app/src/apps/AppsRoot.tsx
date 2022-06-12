@@ -1,25 +1,18 @@
-import React, {Suspense, useState, useLayoutEffect} from 'react';
-import { BrowserRouter, useNavigate } from "react-router-dom";
-import { RecoilRoot, useRecoilState } from 'recoil';
+import {Suspense, useState, useLayoutEffect} from 'react';
+import { BrowserRouter } from "react-router-dom";
+import { RecoilRoot } from 'recoil';
 import AdminRoutes from '../is-admin-app/AdminAppRoutes';
 import PublicRoutes from '../is-public-app/PublicAppRoutes';
-import { appSplash, ISplashSettings } from './splash';
 // https://reactrouter.com/docs/en/v6
 import SplashView from './SplashView';
 
-interface IAppRoutes {
-    isProd:boolean;
-}
-const AppsRoutes = ({isProd=true}:IAppRoutes)=> {
 
-    
-    const navigate = useNavigate(); 
+const AppsRoutes = ()=> {
 
     const [ authState, setAuthState] = useState({
         isAuth:false,
         checked:false,
     });
-    const [ splash, setSplash ] = useRecoilState<ISplashSettings>(appSplash);
 
     useLayoutEffect(()=>{
         //simulando que se checa la autenticacion
@@ -45,7 +38,7 @@ const AppsRoot = () => {
         <RecoilRoot>
             <Suspense fallback={<SplashView location="logedInRoutes:fallback"/>}>
                 <BrowserRouter>
-                    <AppsRoutes isProd={false}/>
+                    <AppsRoutes/>
                 </BrowserRouter>
             </Suspense>
         </RecoilRoot>

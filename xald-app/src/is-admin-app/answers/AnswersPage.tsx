@@ -1,5 +1,4 @@
-import React from "react";
-import { HeaderBar } from "../HeaderBar";
+import { HeaderBar } from "../components/HeaderBar";
 import { AnswersFour } from "./AnswersFour";
 import { AnswersOne } from "./AnswersOne";
 import { AnswersThree } from "./AnswersThree";

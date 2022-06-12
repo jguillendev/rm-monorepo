@@ -1,18 +1,12 @@
 import React from "react";
-import { useRecoilValue } from "recoil";
-import { appSplash } from "./splash";
 
 interface ISplashView {
     location:string;
 }
 
-interface ISplashPortal {
-    location:string;
-}
 
 const SplashView = (props:ISplashView) => {
 
-    const { message } = useRecoilValue(appSplash);
     console.log("splash:rendering:location: ", props.location);
     return <main className="h-screen flex flex-col px-8 py-3">
 

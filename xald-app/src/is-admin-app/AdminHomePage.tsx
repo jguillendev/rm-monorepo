@@ -1,5 +1,4 @@
-import React from "react";
-import {HeaderBar} from "./HeaderBar";
+import {HeaderBar} from "./components/HeaderBar";
 
 export const AdminHomePage = () => {
     return <main className="flex flex-col h-screen w-screen">

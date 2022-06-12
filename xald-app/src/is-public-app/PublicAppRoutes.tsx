@@ -1,6 +1,4 @@
-import React, { Suspense, useLayoutEffect } from 'react';
 import { Route, Routes, useLocation } from "react-router-dom";
-
 
 const PublicRoutes = () => {
 

@@ -1,4 +1,4 @@
-import React , {useLayoutEffect, useState } from "react";
+import {useLayoutEffect, useState } from "react";
 import { IHttpError, IRequest } from "../interfaces/interfaces";
 
 export type HookHttpRequestResult<T> = {
@@ -36,7 +36,7 @@ export const useHttpRequest = <R,T>({url}:IRequest): HookHttpRequestResult<T> =>
         .then(onData)
         .catch(onError);
 
-    },[url]);
+    },[url, error, data]);
 
     return { isLoading, data, error }
 }

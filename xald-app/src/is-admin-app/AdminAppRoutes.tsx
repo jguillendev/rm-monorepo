@@ -1,9 +1,7 @@
-import React, { Suspense, useLayoutEffect } from 'react';
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AdminHomePage } from './AdminHomePage';
 import { AnswersPage } from './answers/AnswersPage';
-import { FlightsPage } from './FlightsPage';
-
+import { FlightsPage } from './flights/FlightsPage';
 
 const AdminRoutes = () => {
 
