@@ -1,21 +1,5 @@
 version: "3"
 services:
-  xdigital-app:
-    build:
-      context: ./xdigital-app
-    container_name: c-xdigital-app
-    image: xdigital-app
-    stdin_open: true
-    ports: 
-      - 81:3000
-    networks:
-      - xal-digital
-    volumes:
-      - ".:/usr/src/app"
-    environment:
-      - REACT_APP_VERSION=2.0.0-compose
-      - REACT_APP_API_ANSWERS=http://localhost:84/api/answers
-      - REACT_APP_API_AIRPORTS=http://localhost:84/api/airports
   xald-app:
     build:
       context: ./xald-app

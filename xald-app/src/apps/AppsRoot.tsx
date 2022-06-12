@@ -1,8 +1,8 @@
 import {Suspense, useState, useLayoutEffect} from 'react';
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
-import AdminRoutes from '../is-admin-app/AdminAppRoutes';
-import PublicRoutes from '../is-public-app/PublicAppRoutes';
+import AdminRoutes from './is-admin-app/AdminAppRoutes';
+import PublicRoutes from './is-public-app/PublicAppRoutes';
 // https://reactrouter.com/docs/en/v6
 import SplashView from './SplashView';
 

@@ -174,7 +174,8 @@ const fourAsync = async () => {
         if(haveTwoFlights){
             airlines.push({
                 id: haveTwoFlights.id,
-                name: haveTwoFlights.name
+                name: haveTwoFlights.name,
+                flights: haveTwoFlights.flights
             });
         }
     }
