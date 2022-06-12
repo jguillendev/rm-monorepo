@@ -1,11 +1,11 @@
 import React, {Suspense, useState, useLayoutEffect} from 'react';
 import { BrowserRouter, useNavigate } from "react-router-dom";
-import { RecoilRoot, useRecoilState } from "recoil";
+import { RecoilRoot, useRecoilState } from 'recoil';
+import AdminRoutes from '../is-admin-app/AdminAppRoutes';
+import PublicRoutes from '../is-public-app/PublicAppRoutes';
+import { appSplash, ISplashSettings } from './splash';
 // https://reactrouter.com/docs/en/v6
-import {appSplash, ISplashSettings} from '~/apps/splash';
 import SplashView from './SplashView';
-import AdminRoutes from '~/is-admin-app/AdminAppRoutes';
-import PublicRoutes from '~/is-public-app/PublicAppRoutes';
 
 interface IAppRoutes {
     isProd:boolean;

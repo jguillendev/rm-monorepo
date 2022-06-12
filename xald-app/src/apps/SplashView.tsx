@@ -1,7 +1,5 @@
 import React from "react";
-import { 
-    useRecoilValue
-} from 'recoil';
+import { useRecoilValue } from "recoil";
 import { appSplash } from "./splash";
 
 interface ISplashView {

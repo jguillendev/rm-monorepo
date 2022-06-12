@@ -1,19 +1,49 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+// @ts-nocheck
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+import React, { useLayoutEffect, useState, FC } from 'react';
+import { createRoot } from 'react-dom/client';
+import AppsRoot from './apps/AppsRoot';
+
+const AppInitError = (error:any) => {
+    return <div>
+        <p>{error.message}</p>
+    </div>
+}
+
+const AppStarting:FC = ({ children }) => {
+
+    const [startingData, setStartingData] = useState({
+        ready:false,
+        error:''
+    });
+
+    useLayoutEffect(()=>{
+        //si me da tiempo pondre una mini autenticacion del servidor
+        //para obtener un token para la seguridad del api
+        //y de la web
+        setTimeout(function(){
+            setStartingData({
+                ready:true
+            });
+        },500);
+    });
+    
+    return <React.Fragment>
+        {
+            startingData.ready === true
+            ? children
+            : <AppInitError />
+        }
+    </React.Fragment>
+}
+
+const container = document.getElementById('root');
+const root = createRoot(container);
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <AppStarting>
+        <AppsRoot />
+    </AppStarting>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
